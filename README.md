@@ -1,2 +1,2 @@
-# llamarizer
-Custom Llamarizer.
+# 🦙 Llamarizer
+Custom llamarizer.
