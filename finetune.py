@@ -8,7 +8,7 @@ from peft import AutoPeftModelForCausalLM, LoraConfig, get_peft_model, prepare_m
 from utils import find_all_linear_names, print_trainable_parameters
 
 output_dir="./results"
-model_name ="codellama/CodeLlama-34b-hf"
+model_name ="codellama/CodeLlama-13b-Instruct-hf"
 
 dataset = load_dataset('timdettmers/openassistant-guanaco', split="train")
 
