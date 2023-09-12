@@ -2,15 +2,16 @@ import os
 import torch
 
 from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments,BitsAndBytesConfig
-from datasets import load_dataset
+from datasets import load_dataset, Dataset
 from trl import SFTTrainer
 from peft import AutoPeftModelForCausalLM, LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from utils import find_all_linear_names, print_trainable_parameters
 
 output_dir="./results"
-model_name ="codellama/CodeLlama-13b-Instruct-hf"
+model_name ="codellama/CodeLlama-13b-hf"
 
-dataset = load_dataset('timdettmers/openassistant-guanaco', split="train")
+## load local dataset stored previously (ds.save_to_disk("data/arxiv_summary_prompts"))
+dataset = Dataset.from_file("data/arxiv_summary_prompts/data-00000-of-00001.arrow")
 
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
@@ -29,7 +30,7 @@ tokenizer.padding_side = "right"  # Fix weird overflow issue with fp16 training
 
 # Change the LORA hyperparameters accordingly to fit your use case
 peft_config = LoraConfig(
-    r=32,
+    r=8,
     lora_alpha=16,
     target_modules=find_all_linear_names(base_model),
     lora_dropout=0.05,
@@ -67,6 +68,8 @@ trainer = SFTTrainer(
 )
 
 trainer.train()
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
 trainer.save_model(output_dir)
 
 output_dir = os.path.join(output_dir, "final_checkpoint")
