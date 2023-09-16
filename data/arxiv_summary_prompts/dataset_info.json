@@ -3,7 +3,7 @@
   "citation": "",
   "config_name": "default",
   "dataset_name": "generator",
-  "dataset_size": 37376085,
+  "dataset_size": 24006786,
   "description": "",
   "download_checksums": {},
   "download_size": 0,
@@ -15,11 +15,11 @@
   },
   "homepage": "",
   "license": "",
-  "size_in_bytes": 37376085,
+  "size_in_bytes": 24006786,
   "splits": {
     "train": {
       "name": "train",
-      "num_bytes": 37376085,
+      "num_bytes": 24006786,
       "num_examples": 472,
       "dataset_name": "generator"
     }

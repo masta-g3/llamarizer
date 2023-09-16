@@ -10,7 +10,7 @@ from utils import find_all_linear_names, print_trainable_parameters
 def main():
     """ Finetune a llama model on a dataset."""
     output_dir = "./results"
-    model_name = "codellama/CodeLlama-13b-hf"
+    model_name = "codellama/CodeLlama-7b-hf"
     dataset = Dataset.from_file("data/arxiv_summary_prompts/data-00000-of-00001.arrow")
 
     bnb_config = BitsAndBytesConfig(
@@ -30,7 +30,7 @@ def main():
 
     # Change the LORA hyperparameters accordingly to fit your use case
     peft_config = LoraConfig(
-        r=8,
+        r=32,
         lora_alpha=16,
         target_modules=find_all_linear_names(base_model),
         lora_dropout=0.05,
