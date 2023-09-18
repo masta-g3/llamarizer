@@ -10,7 +10,7 @@ from utils import find_all_linear_names, print_trainable_parameters
 def main():
     """ Finetune a llama model on a dataset."""
     output_dir = "./results"
-    model_name = "codellama/CodeLlama-7b-hf"
+    model_name = "codellama/CodeLlama-34b-hf"
     dataset = Dataset.from_file("data/arxiv_summary_prompts/data-00000-of-00001.arrow")
 
     bnb_config = BitsAndBytesConfig(
